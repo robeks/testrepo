@@ -1,0 +1,14 @@
+select
+  substr(P.ROUTINENAME,1,48) as ROUTINENAME,
+  substr(P.SPECIFICNAME,1,48) as SPECIFICNAME,
+  case when P.ROWTYPE in ('B','O','P') then CHAR('IN',3) else CHAR('OUT',3) end as IN_OUT,
+  cast(p.ORDINAL as char(3)) as ORD,
+  substr(P.PARMNAME,1,40) as PARMNAME,
+  substr(P.TYPENAME,1,16) as TYPE
+from sysibm.sysroutines r,  sysibm.sysroutineparms p
+where p.routineschema=r.routineschema
+  and p.routinename=r.routinename
+  and p.specificname=r.specificname
+  and r.function_type='T'
+  and r.ROUTINENAME='MON_GET_TABLE'
+order by P.ROUTINESCHEMA,P.ROUTINENAME,P.SPECIFICNAME,IN_OUT,P.ORDINAL
