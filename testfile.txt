@@ -7,4 +7,3 @@ where
   and substr(r.ROUTINENAME,1,4) in ('SNAP','MON_','ENV_','COMP')
   and substrb(r.SPECIFICNAME,-3,3) not in ('V91', 'V95', 'V97', '_AP')
 order by r.ROUTINESCHEMA,r.ROUTINENAME,r.SPECIFICNAME
---test 
